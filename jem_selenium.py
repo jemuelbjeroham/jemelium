@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+import getpass
 
 def test_selenium():
     driver = webdriver.Chrome()
@@ -9,6 +10,10 @@ def test_selenium():
     arista_username = driver.find_element(By.ID, "username")
     arista_username.send_keys("jemueljeroham.b@hcltech.com")
     arista_username.send_keys(Keys.RETURN)
+    password = getpass.getpass("Enter the Support Portal Password: ")
+    arista_password = driver.find_element(By.ID, "password")
+    arista_password.send_keys(password)
+    arista_password.send_keys(Keys.RETURN)
 
     # driver.back()
     # driver.forward()
