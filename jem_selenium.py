@@ -57,11 +57,19 @@ def test_selenium():
         )
 
         # Click the New Case button
-        arista_lgntype = driver.find_element(By.NAME, "New")
-        arista_lgntype.click()
+        arista_newcasebutton = driver.find_element(By.NAME, "New")
+        arista_newcasebutton.click()
 
         # print("Login successful!")
 
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "input-65"))
+        )
+
+        # Fill the cc email ID
+        arista_cc_email = driver.find_element(By.ID, "input-65")
+        # arista_cc_email.click()
+        # arista_cc_email.send_keys("testemail@jemtech.com")
 
 
     except Exception as e:
