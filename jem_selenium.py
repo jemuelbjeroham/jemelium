@@ -13,7 +13,7 @@ def test_selenium():
 
     try:
         # Open the Arista login page
-        driver.get("https://www.arista.com/en/login")
+        driver.get("https://arista.my.site.com/AristaCommunity/s/support")
 
         # Wait for the username field to be present
         WebDriverWait(driver, 10).until(
@@ -25,12 +25,12 @@ def test_selenium():
         arista_username.send_keys(username)
         arista_username.send_keys(Keys.RETURN)
 
-        # Wait for the login type button (wired login) to be present
+        # Wait for the login type button to be present
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.ID, "btnLoginWired"))
         )
 
-        # Click the login type button (e.g., Wired Login)
+        # Click the login type button
         arista_lgntype = driver.find_element(By.ID, "btnLoginWired")
         arista_lgntype.click()
 
@@ -47,14 +47,22 @@ def test_selenium():
         arista_password.send_keys(password)
         arista_password.send_keys(Keys.RETURN)
 
-        # Wait for login process to complete (you may want to wait for a specific element after login)
+        # Wait for login process to complete
         WebDriverWait(driver, 10).until(
-            EC.url_changes("https://www.arista.com/en/login")
+            EC.url_changes("https://arista.my.site.com/AristaCommunity/s/support")
         )
 
-        print("Login successful!")
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.NAME, "New"))
+        )
 
-        
+        # Click the New Case button
+        arista_lgntype = driver.find_element(By.NAME, "New")
+        arista_lgntype.click()
+
+        # print("Login successful!")
+
+
 
     except Exception as e:
         print(f"An error occurred: {e}")
