@@ -1,0 +1,26 @@
+Steps in the Script:
+AC1 - Fetch hostgroup agents:
+The get_hostgroup_agents() function runs the hg_aglist script to fetch the list of all agents in the host group.
+
+AC2 - Validate host groups:
+The validate_and_cleanup() function checks the output against the predefined valid hosts.
+
+AC3 - Use predefined host list for validation:
+A list of predefined hosts is provided in the script (predefined_hosts).
+
+AC4 - Output file for errors (if any):
+The script logs invalid hosts directly in the console, which can be redirected to a file when scheduled.
+
+AC5 - Remove invalid hosts:
+The remove_host() function uses the CLI API command (ctm config server:hostgroup:agent::delete) to remove invalid hosts.
+
+AC6 - Generate summary:
+The script outputs a summary:
+
+If the host group is fine: "No host is added. Host group TALONBATCH is good."
+If hosts were removed: "Removed invalid host: <hostname> from host group TALONBATCH."
+How to Use the Script:
+Save this script as a .py file (e.g., validate_talonbatch.py).
+Update the predefined hosts and script path as per your environment.
+Schedule it in Control-M as a job.
+Redirect the script's output to a file if you want logs (e.g., python validate_talonbatch.py > output.log 2>&1).
