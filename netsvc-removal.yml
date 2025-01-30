@@ -1,0 +1,10 @@
+---
+- name: Remove netscout-netsvc configuration from Arista devices
+  hosts: arista_devices  # Update this with your inventory group
+  gather_facts: no
+  tasks:
+    - name: Remove netscout-netsvc configuration
+      arista.eos.eos_config:
+        lines:
+          - "no service netscout-netsvc"  # Adjust as per actual config
+        save_when: changed
